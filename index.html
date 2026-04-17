@@ -26,7 +26,7 @@
                             <iframe src="${url}" allow="fullscreen" style="width: 100%; height: 100%; border: none;" id="program-frame"></iframe>
                         </div>
                         <div style="display: flex; gap: 10px; align-items: center;">
-                            <button onclick="this.closest('.window-body').querySelector('iframe').requestFullscreen()">Fullscreen</button>
+                            <button onclick="iframeFullscreen(this.closest('.window-body').querySelector('iframe'))">Fullscreen</button>
                             <button onclick="window.open('${url}', '_blank')">Open in new tab</button>
                             <p style="margin: 0;">${notes}</p>
                         </div>
@@ -40,6 +40,10 @@
                 });
                 
                 makeWindowDraggable(newWindow); 
+            }
+
+            function iframeFullscreen(iframe) {
+                    iframe.contentWindow.postMessage('vLiveRequestFullscreen', '*')
             }
 
             function toggleMaximize(windowEl) {
