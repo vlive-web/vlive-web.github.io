@@ -53,6 +53,10 @@
       }
     }, false);
 
+    window.addEventListener("resize", function(event) {
+      FullScreenHook()
+    });
+
     var loadingContext = document.getElementById('loadingCanvas').getContext('2d');
 
     function drawLoadingText(text) {
