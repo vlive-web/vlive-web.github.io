@@ -131,6 +131,11 @@
 
                 makeWindowDraggable(newWindow);
             }
+
+            window.addEventListener("beforeunload", () => {
+                event.preventDefault();
+                event.returnValue = '';
+            });
         </script>
     </head>
 
