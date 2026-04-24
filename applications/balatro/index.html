@@ -41,6 +41,15 @@
         canvas.mozRequestFullScreen();
     }
 
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
     function FullScreenHook() {
       var canvas = document.getElementById("canvas");
       canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
