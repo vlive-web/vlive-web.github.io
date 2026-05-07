@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="https://unpkg.com/7.css">
 
         <script>
-            function spawnWindow(url, title, notes = '') {
+            function spawnEmbedWindow(url, title, notes = '') {
                 const newWindow = document.createElement('div');
                 newWindow.classList.add('window', 'active', 'glass');
                 newWindow.setAttribute('style', '--w7-w-bg: rgba(255, 255, 255, 0.8); position: absolute; top: 100px; left: 100px; z-index: 1000; width: 820px; height: auto; display: flex; flex-direction: column;');
@@ -115,7 +115,7 @@
                             <fieldset>
                                 <legend>Application credits</legend>
                                 <ul>
-                                    <li>Pizza Tower, ULTRAKILL - github user <a href="https://github.com/genizy">genizy</a></li>
+                                    <li>Pizza Tower, ULTRAKILL, Cuphead - github user <a href="https://github.com/genizy">genizy</a></li>
                                     <li>Balatro - could not find source</li>
                                 </ul>
                             </fieldset>
@@ -136,56 +136,116 @@
                 event.preventDefault();
                 event.returnValue = '';
             });
+
+            var closeAttempts = 0;
+
+            function attemptCloseWebpage() {
+                if (closeAttempts == 0) {
+                    alert("do i have to do everything for you");
+                } else if (closeAttempts == 1) {
+                    alert("close the tab. i can't do it for you.");
+                } else if (closeAttempts == 2) {
+                    alert("seriously, they don't let me close the tab for you. just press the little close button on the tab.");
+                } else if (closeAttempts == 3) {
+                    alert("i can close the dashboard window. that's not the tab. you'll just have a green background.");
+                } else if (closeAttempts == 4) {
+                    confirm("do you want that?") ? document.querySelector('.window.active').remove() : closeAttempts = 2;
+                }
+                closeAttempts++;
+            }
         </script>
     </head>
 
-    <body>
-        <div class="window active glass" style="--w7-w-bg: rgba(255, 255, 255, 0.8);">
+    <body style="background-color:#004400;">
+        <div class="window active glass" style="--w7-w-bg: rgba(50, 255, 50, 0.9); background: rgba(0, 0, 0, 0); position: fixed; top: 15px; left: 15px; width: calc(100vw - 30px); height: calc(100vh - 30px); display: flex; flex-direction: column;">
             <div class="title-bar">
                 <div class="title-bar-text">vLive Dashboard</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize"></button>
                     <button aria-label="Maximize"></button>
-                    <button aria-label="Close" onclick="alert(`i can't close the page myself, do it yourself`)"></button>
+                    <button aria-label="Close" onclick="attemptCloseWebpage()"></button>
                 </div>
             </div>
-            <div class="window-body">
+            <div class="window-body" style="flex: 1; overflow: auto;">
                 <h1>vLive Dashboard</h1>
                 <p>Select an application to open.</p>
+
+                <div class="vLive-dashboard-v2-program-selector">
+                    <div class="vlive-dashboard-v2-program-selector-item-container">
+                        <img width="100" src="applications/pizza-tower/icon.png" alt="Pizza Tower game icon">
+                        <div class="vlive-dashboard-v2-program-selector-item-details-container">
+                            <h2>Pizza Tower</h2>
+                            <button onclick="spawnEmbedWindow('applications/pizza-tower/index.html', 'Pizza Tower', 'Game automatically switches to fullscreen. Press F11 to exit fullscreen.')">Open</button>
+                        </div>
+                    </div>
+
+                    <div class="vlive-dashboard-v2-program-selector-item-container">
+                        <img src="applications/ultrakill/icon.png" alt="ULTRAKILL game icon" width=100>
+                        <div class="vlive-dashboard-v2-program-selector-item-details-container">
+                            <h2>ULTRAKILL</h2>
+                            <button onclick="spawnEmbedWindow('applications/ultrakill/index.html', 'ULTRAKILL', 'This is an older version of the game.')">Open</button>
+                        </div>
+                    </div>
+
+                    <div class="vlive-dashboard-v2-program-selector-item-container">
+                        <img src="applications/balatro/icon.png" alt="Balatro game icon" width=100>
+                        <div class="vlive-dashboard-v2-program-selector-item-details-container">
+                            <h2>Balatro</h2>
+                            <button onclick="spawnEmbedWindow('applications/balatro/index.html', 'Balatro', 'Window sizing is broken. Open in new tab, and then toggle fullscreen.')">Open</button>
+                        </div>
+                    </div>
+
+                    <div class="vlive-dashboard-v2-program-selector-item-container">
+                        <img src="applications/cuphead/icon.png" alt="Cuphead game icon" width=100>
+                        <div class="vlive-dashboard-v2-program-selector-item-details-container">
+                            <h2>Cuphead</h2>
+                            <button onclick="spawnEmbedWindow('applications/cuphead/index.html', 'Cuphead', 'Needs a higher powered computer. The average school Chromebook is not enough.')">Open</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+
+                <p>Program you want not on the list?</p>
+                <button onclick="spawnEmbedWindow('https://forms.gle/9G8j42HBbaf88cPb6', 'vLive suggestions form', 'if the connection is blocked use the new tab button')">Request</button>
+                <button onclick="spawnEmbedWindow('https://docs.google.com/spreadsheets/d/1WRiRyThavbPfwygSR6qGYnY0Z2Ex1vhonqd29iOfX_Y/edit?usp=sharing', 'all suggestions', 'if connection is blocked press new tab')">View all requests</button>
+
+                <br>
+                <br>
+                <br>
+
                 <!-- <div class="grid-container">
                     <div class="grid-item">
                         <img src="applications/pizza-tower/icon.png" alt="" class="grid-item-icon">
                         <h2>Pizza Tower</h2>
                         <p>[No description]</p>
-                        <button onclick="spawnWindow('applications/pizza-tower/index.html', 'Pizza Tower', 'Game automatically switches to fullscreen. Press F11 to exit fullscreen.')">Open</button>
+                        <button onclick="spawnEmbedWindow('applications/pizza-tower/index.html', 'Pizza Tower', 'Game automatically switches to fullscreen. Press F11 to exit fullscreen.')">Open</button>
                     </div>
 
                     <div class="grid-item">
                         <img src="applications/ultrakill/icon.png" alt="ULTRAKILL" class="grid-item-icon">
                         <h2>ULTRAKILL</h2>
                         <p>[No description]</p>
-                        <button onclick="spawnWindow('applications/ultrakill/index.html', 'ULTRAKILL', 'This is an older version of the game.')">Open</button>
+                        <button onclick="spawnEmbedWindow('applications/ultrakill/index.html', 'ULTRAKILL', 'This is an older version of the game.')">Open</button>
                     </div>
 
                     <div class="grid-item">
                         <img src="applications/balatro/icon.png" alt="Balatro" class="grid-item-icon">
                         <h2>Balatro</h2>
                         <p>[No description]</p>
-                        <button onclick="spawnWindow('applications/balatro/index.html', 'Balatro', 'Window sizing is broken. Open in new tab, and then toggle fullscreen.')">Open</button>
+                        <button onclick="spawnEmbedWindow('applications/balatro/index.html', 'Balatro', 'Window sizing is broken. Open in new tab, and then toggle fullscreen.')">Open</button>
                     </div>
 
                     <div class="grid-item">
                         <img src="applications/cuphead/icon.png" alt="Cuphead" class="grid-item-icon">
                         <h2>Cuphead</h2>
                         <p>[No description]</p>
-                        <button onclick="spawnWindow('applications/cuphead/index.html', 'Cuphead', 'Needs a higher powered computer. The average school Chromebook is not enough.')">Open</button>
+                        <button onclick="spawnEmbedWindow('applications/cuphead/index.html', 'Cuphead', 'Needs a higher powered computer. The average school Chromebook is not enough.')">Open</button>
                     </div>
 
                 </div> -->
 
-                <button onclick="spawnCreditsWindow()">show vLive credits</button>
-                <button onclick="spawnWindow('https://forms.gle/9G8j42HBbaf88cPb6', 'vLive suggestions form', 'if the connection is blocked use the new tab button')">vLive suggestions form</button>
-                <button onclick="spawnWindow('https://docs.google.com/spreadsheets/d/1WRiRyThavbPfwygSR6qGYnY0Z2Ex1vhonqd29iOfX_Y/edit?usp=sharing', 'form responses', 'if connection is blocked press new tab')">form responses</button>
+                <button onclick="spawnCreditsWindow()">vLive credits</button>
             </div>
         </div>
     </body>
