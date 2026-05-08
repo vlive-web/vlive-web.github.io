@@ -54,10 +54,3 @@ body {
     padding: 15px;
     border: 1px solid;
 }
-
-.vlive-dashboard-v2-program-selector-item-details-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    justify-content: flex-start;
-}
