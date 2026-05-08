@@ -1,3 +1,19 @@
+/* Normal Version */
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('/SegoeUI-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('/SegoeUI-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
 body {
     background-image: linear-gradient(90deg, green, lightgreen);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -52,5 +68,5 @@ body {
     align-items: flex-start;
     gap: 15px;
     padding: 15px;
-    border: 1px solid;
+    border: 0px solid;
 }
