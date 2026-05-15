@@ -70,3 +70,8 @@ body {
     padding: 15px;
     border: 0px solid;
 }
+
+.vlive-dashboard-v2-program-selector-item-container img {
+    width: 100px;
+    height: 100px;
+}
