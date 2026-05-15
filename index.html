@@ -190,9 +190,20 @@
                 } else if (closeAttempts == 3) {
                     alert("i can close the dashboard window. that's not the tab. you'll just have a green background.");
                 } else if (closeAttempts == 4) {
-                    confirm("do you want that?") ? document.querySelector('.window.active').remove() : closeAttempts = 2;
+                    confirm("do you want that?") ? finalCloseAttempt() : closeAttempts = 2;
                 }
                 closeAttempts++;
+            }
+
+            function finalCloseAttempt() {
+                document.querySelector('.window.active').remove();
+                finalCloseAttemptMessage();
+            }
+
+            async function finalCloseAttemptMessage() {
+                const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+                wait(3000);
+                alert("this is what you wanted.");
             }
 
             function initTabs() {
