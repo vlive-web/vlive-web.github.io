@@ -194,6 +194,31 @@
                 }
                 closeAttempts++;
             }
+
+            function initTabs() {
+                document.querySelectorAll('.tabs').forEach(tabGroup => {
+                    const tabs = tabGroup.querySelectorAll('[role="tab"]');
+                    const panels = tabGroup.querySelectorAll('[role="tabpanel"]');
+                    if (!tabs.length || !panels.length) return;
+
+                    tabs.forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+                            tab.setAttribute('aria-selected', 'true');
+
+                            panels.forEach(panel => panel.hidden = true);
+
+                            const panelId = tab.getAttribute('aria-controls');
+                            const panel = document.getElementById(panelId);
+                            if (panel) {
+                                panel.hidden = false;
+                            }
+                        });
+                    });
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', initTabs);
         </script>
     </head>
 
@@ -213,6 +238,7 @@
                 <section class="tabs">
                     <menu role="tablist" aria-label="Program tabs">
                         <button role="tab" aria-selected="true" aria-controls="games-tab">Games</button>
+                        <button role="tab" aria-controls="emulators-tab">Emulators</button>
                     </menu>
                     <article role="tabpanel" id="games-tab">
                         <div class="vLive-dashboard-v2-program-selector">
@@ -261,6 +287,17 @@
                                 <div class="vlive-dashboard-v2-program-selector-item-details-container">
                                     <h2>HOTLINE MIAMI</h2>
                                     <button onclick="spawnEmbedWindow('applications/hotline-miami/index.html', 'HOTLINE MIAMI', 'This is an older version of the game. Open in new tab for better performance.')">Open</button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article role="tabpanel" id="emulators-tab" hidden>
+                        <div class="vlive-dashboard-v2-program-selector">
+                            <div class="vlive-dashboard-v2-program-selector-item-container">
+                                <img src="applications/webnes/icon.png" alt="NES emulator icon" width=100>
+                                <div class="vlive-dashboard-v2-program-selector-item-details-container">
+                                    <h2>NES</h2>
+                                    <button onclick="spawnEmbedWindow('applications/webnes/index.html', 'WebNES emulator', 'vLive does not supply game ROM files. Provide your own.')">Open</button>
                                 </div>
                             </div>
                         </div>
